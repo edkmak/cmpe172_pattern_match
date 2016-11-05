@@ -2,6 +2,7 @@ const through2 = require('through2');
 const split2 = require('split2');
 const fs = require('fs');
 
+const FILE = 'input-sensor.txt';
 var delimiter;
 
 //process.argv contains the arguments of the "node spit-match.js -p ,"
@@ -27,14 +28,14 @@ stream.on('data', (data) => {
     console.log(data);
 });
 
-fs.readFile('input-sensor.txt', (err, data) => {
+fs.readFile(FILE, (err, data) => {
 	if (err)
 		throw err;
 
 	console.log('--------------------Input----------------------\n');
 	console.log(data.toString() + '\n');
 
-	fs.createReadStream('input-sensor.txt')
+	fs.createReadStream(FILE)
 		.pipe(split2())
 		.pipe(stream)
 });
