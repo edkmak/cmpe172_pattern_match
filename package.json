@@ -1,0 +1,23 @@
+{
+  "name": "cmpe172_pattern_match",
+  "version": "1.0.0",
+  "description": "",
+  "main": "split-match.js",
+  "scripts": {
+    "test": "node split-match.js -p"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JaylanT/cmpe172_pattern_match.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JaylanT/cmpe172_pattern_match/issues"
+  },
+  "homepage": "https://github.com/JaylanT/cmpe172_pattern_match#readme",
+  "dependencies": {
+    "split2": "^2.1.0",
+    "through2": "^2.0.1"
+  }
+}
