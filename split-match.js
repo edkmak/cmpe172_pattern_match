@@ -1,34 +1,45 @@
-var through2 = require('through2');
-var split2 = require('split2');
-var fs = require('fs');
+const through2 = require('through2');
+const split2 = require('split2');
+const fs = require('fs');
 
-var parseby;
+var delimiter;
 
 //process.argv contains the arguments of the "node spit-match.js -p ,"
 process.argv.forEach(function(val, index, array){
 	if(array.length != 4){
 		console.log('incorrect number of arguements. ');
 	}
-	parseby = array[3];
+	delimiter = array[3];
 });
 
-var stream = through2({ objectMode: true }, function(chunk, enc, callback) {
-    var string = chunk.toString();
-    var result = string.replace(/\n/, '').split(parseby);
+const stream = through2({ objectMode: true }, function(chunk, enc, callback) {
+    const string = chunk.toString();
+    const result = string.replace(/\n/, '').split(delimiter);
+	result.splice(result.length - 1, 1);
 
     this.push(result);
     callback()
 })
 
 stream.on('data', function(data) {
-    var toString = Object.prototype.toString.call(data)
+    Object.prototype.toString.call(data)
     console.log('------------------Output----------------------');
-    console.log(data, '\n');
+    console.log(data);
 })
 
-console.log('--------------------Input----------------------');
-console.log()
-var inputStream = fs.createReadStream( "input-sensor.txt" )
-	.pipe(split2())
-	.pipe(stream)
-    
+console.log('--------------------Input----------------------\n');
+fs.readFile('input-sensor.txt', printFile)
+
+function printFile(err, data) {
+	if (err)
+		throw err;
+
+    console.log(data.toString() + '\n');
+
+	const readStream = fs.createReadStream('input-sensor.txt');
+
+	readStream
+		.pipe(split2())
+		.pipe(stream)
+}
+
