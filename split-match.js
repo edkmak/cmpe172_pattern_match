@@ -5,7 +5,7 @@ const fs = require('fs');
 var delimiter;
 
 //process.argv contains the arguments of the "node spit-match.js -p ,"
-process.argv.forEach(function(val, index, array){
+process.argv.forEach((val, index, array) => {
 	if(array.length != 4){
 		console.log('incorrect number of arguements. ');
 	}
@@ -19,25 +19,23 @@ const stream = through2({ objectMode: true }, function(chunk, enc, callback) {
 
     this.push(result);
     callback()
-})
+});
 
-stream.on('data', function(data) {
+stream.on('data', (data) => {
     Object.prototype.toString.call(data)
     console.log('------------------Output----------------------');
     console.log(data);
-})
+});
 
-console.log('--------------------Input----------------------\n');
-fs.readFile('input-sensor.txt', splitInput)
-
-function splitInput(err, data) {
+fs.readFile('input-sensor.txt', (err, data) => {
 	if (err)
 		throw err;
 
-    console.log(data.toString() + '\n');
+	console.log('--------------------Input----------------------\n');
+	console.log(data.toString() + '\n');
 
 	fs.createReadStream('input-sensor.txt')
 		.pipe(split2())
 		.pipe(stream)
-}
+});
 
