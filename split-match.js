@@ -28,17 +28,15 @@ stream.on('data', function(data) {
 })
 
 console.log('--------------------Input----------------------\n');
-fs.readFile('input-sensor.txt', printFile)
+fs.readFile('input-sensor.txt', splitInput)
 
-function printFile(err, data) {
+function splitInput(err, data) {
 	if (err)
 		throw err;
 
     console.log(data.toString() + '\n');
 
-	const readStream = fs.createReadStream('input-sensor.txt');
-
-	readStream
+	fs.createReadStream('input-sensor.txt')
 		.pipe(split2())
 		.pipe(stream)
 }
