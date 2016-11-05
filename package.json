@@ -17,7 +17,6 @@
   },
   "homepage": "https://github.com/JaylanT/cmpe172_pattern_match#readme",
   "dependencies": {
-    "split2": "^2.1.0",
     "through2": "^2.0.1"
   }
 }

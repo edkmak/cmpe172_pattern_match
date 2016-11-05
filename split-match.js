@@ -1,5 +1,4 @@
 const through2 = require('through2');
-const split2 = require('split2');
 const fs = require('fs');
 
 const FILE = 'input-sensor.txt';
@@ -36,7 +35,6 @@ fs.readFile(FILE, (err, data) => {
 	console.log(data.toString() + '\n');
 
 	fs.createReadStream(FILE)
-		.pipe(split2())
 		.pipe(stream)
 });
 
